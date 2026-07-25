@@ -27,3 +27,34 @@ It is simply a way for your backend to tell the browser:
 ```
 "I know this request comes from another origin, and I allow it."
 ```
+
+---
+
+# API Endpoints
+
+Before writing code, let's define the API.
+
+### Authentication
+```
+POST /api/auth/register
+POST /api/auth/login
+GET  /api/auth/profile
+```
+### Weather
+```
+GET /api/weather/:city
+```
+### Favorites
+```
+POST   /api/favorites
+GET    /api/favorites
+DELETE /api/favorites/:id
+```
+
+Notice the /api prefix. It's a common convention that makes it clear these are API routes and leaves room to serve a frontend or other resources later.
+
+---
+
+# Relationships using ref
+In SQL, you'd use a foreign key.
+In MongoDB, we use an ObjectId reference.
