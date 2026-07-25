@@ -10,16 +10,27 @@ const favoriteSchema = new mongoose.Schema({
     },
     city: {
         type: String,
-        required: true,
+        required: [true, "City is required"],
         trim: true
     },
     country: {
         type: String,
-        required: true
+        required: [true, "Country is required"],
+        uppercase: true
     }
 }, {
     timestamps: true
 });
+
+// What does this index do?
+// It creates a compound unique index.
+// That means:
+// The same user cannot save the same city twice.
+// But different users can each save London.
+favoriteSchema.index(
+    { user: 1, city: 1 },
+    { unique: true }
+);
 
 const Favorite = mongoose.model("Favorite", favoriteSchema);
 
