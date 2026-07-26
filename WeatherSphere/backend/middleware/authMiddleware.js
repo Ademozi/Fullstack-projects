@@ -1,9 +1,13 @@
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
 
 // next => continue to the controller if everything is valid
 const protect = async (req, res, next) => {
     try {
+
+        console.log(req.headers.authorization);
+
         const authHeader = req.headers.authorization;
 
         if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -16,11 +20,15 @@ const protect = async (req, res, next) => {
         // Extract only the token
         const token = authHeader.split(" ")[1];
 
+        console.log(token);
+
         // Verify the token
-        const decoded = JsonWebTokenError.verify(
+        const decoded = jwt.verify(
             token,
             process.env.JWT_SECRET
         );
+
+        console.log(decoded);
 
         // -password means exclude password because we don't need it 
         const user = await User.findById(decoded.id)
@@ -48,3 +56,5 @@ const protect = async (req, res, next) => {
 
     }
 };
+
+module.exports = protect;
