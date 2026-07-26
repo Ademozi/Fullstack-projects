@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const generateToken = require("../utils/generateToken");
 
 const register = async (req, res) => {
     try {
@@ -64,6 +65,7 @@ const login = async (req, res) => {
             return res.status(401).json({
                 success: false,
                 message: "Invalid email or password."
+                // Here we don't say "User not found" to avoid giving away whether the email exists in our database for security reasons.
             });
         }
         
@@ -75,16 +77,18 @@ const login = async (req, res) => {
             });
         }
 
-        const token = jwt.sign(
-            { id: user._id, email: user.email },
-            process.env.JWT_SECRET,
-            { expiresIn: "1h" }
-        );
+        // Generate JWT token
+        const token = generateToken(user._id);
 
         res.status(200).json({
             success: true,
             message: "Login successful",
-            token
+            token,
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email
+            }
         });
     }
     catch (error) {
