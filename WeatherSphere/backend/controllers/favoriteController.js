@@ -4,18 +4,19 @@ const Favorite = require("../models/Favorite");
 const addFavorite = async (req, res) => {
     try {
 
-        const { city } = req.body;
+        const { city, country } = req.body;
 
-        if (!city) {
+        if (!city || !country) {
             return res.status(400).json({
                 success: false,
-                message: "City is required."
+                message: "City and country are required."
             });
         }
 
         const favorite = await Favorite.create({
             user: req.user._id,
-            city
+            city,
+            country
         });
 
         res.status(201).json({
