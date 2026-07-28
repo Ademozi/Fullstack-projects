@@ -34,3 +34,7 @@ const addFavorite = async (req, res) => {
         });
     }
 };
+
+module.exports = {
+    addFavorite
+};
