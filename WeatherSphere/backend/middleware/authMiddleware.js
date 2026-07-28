@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const protect = async (req, res, next) => {
     try {
 
-        console.log(req.headers.authorization);
+        //console.log(req.headers.authorization);
 
         const authHeader = req.headers.authorization;
 
@@ -20,7 +20,7 @@ const protect = async (req, res, next) => {
         // Extract only the token
         const token = authHeader.split(" ")[1];
 
-        console.log(token);
+        //console.log(token);
 
         // Verify the token
         const decoded = jwt.verify(
@@ -28,7 +28,7 @@ const protect = async (req, res, next) => {
             process.env.JWT_SECRET
         );
 
-        console.log(decoded);
+        //console.log(decoded);
 
         // -password means exclude password because we don't need it 
         const user = await User.findById(decoded.id)
