@@ -60,7 +60,42 @@ const getFavorites = async (req, res) => {
     }
 };
 
+const deleteFavorite = async (req, res) => {
+    try {
+
+        // this is a secure way
+        // imagine another user had the favorite id of another use,
+        // so he can delete favorites of other users 
+        const favorite = await Favorite.findOneAndDelete({
+            _id: req.params.id,
+            user: req.user._id
+        });
+
+        if (!favorite) {
+            return res.status(404).json({
+                success: false,
+                message: "Favorite not found."
+            });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Favorite deleted successfully."
+        });
+
+    } catch (error) {
+        
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
+    }
+};
+
 module.exports = {
     addFavorite,
-    getFavorites
+    getFavorites,
+    deleteFavorite
 };
