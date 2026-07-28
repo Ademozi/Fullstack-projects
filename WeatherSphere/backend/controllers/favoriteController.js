@@ -36,6 +36,31 @@ const addFavorite = async (req, res) => {
     }
 };
 
+const getFavorites = async (req, res) => {
+    try {
+
+        const favorites = await Favorite.find({
+            user: req.user._id
+        });
+
+        res.status(200).json({
+            success: true,
+            count: favorites.length,
+            favorites
+        });
+
+    } catch (error) {
+        
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Internal server error"
+        });
+    }
+};
+
 module.exports = {
-    addFavorite
+    addFavorite,
+    getFavorites
 };
