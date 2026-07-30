@@ -1,5 +1,43 @@
+import { useState } from "react";
+
+import SearchBar from "../components/SearchBar";
+import WeatherCard from "../components/WeatherCard";
+
+import { getWeather } from "../services/weatherService";
+
 function Home() {
-  return <h1>Home Page</h1>;
+
+    const [weather, setWeather] = useState(null);
+
+    const handleSearch = async (city) => {
+
+        try {
+
+            const response = await getWeather(city);
+
+            setWeather(response.data.weather);
+
+        } catch (error) {
+
+            console.error(error.response?.data || error.message);
+
+            alert("City not found.");
+
+        }
+
+    };
+
+    return (
+        <div>
+
+            <h1>WeatherSphere</h1>
+
+            <SearchBar onSearch={handleSearch} />
+
+            <WeatherCard weather={weather} />
+
+        </div>
+    );
 }
 
 export default Home;
