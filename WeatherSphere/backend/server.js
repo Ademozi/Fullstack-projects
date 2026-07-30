@@ -5,6 +5,7 @@ const cors = require("cors");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const favoriteRoutes = require("./routes/favoriteRoutes");
+const weatherRoutes = require("./routes/weatherRoutes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/favorites", favoriteRoutes);
+app.use("/api/weather", weatherRoutes);
 
 app.get("/", (req, res) => {
 
