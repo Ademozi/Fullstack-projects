@@ -1,5 +1,6 @@
 import api from "./api";
 
-export const getWeather = (city) => {
-    return api.get(`/weather/${city}`);
+export const getWeather = async (city) => {
+    const response = await api.get(`/weather/${city}`);
+    return response.data;
 };

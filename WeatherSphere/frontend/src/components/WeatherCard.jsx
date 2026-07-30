@@ -1,30 +1,30 @@
 function WeatherCard({ weather }) {
 
-    if (!weather) return null;
+    if (!weather) {
+        return <p>Search for a city to see the weather.</p>;
+    }
 
     return (
         <div>
-
             <h2>
                 {weather.city}, {weather.country}
             </h2>
 
             <h3>
-                {weather.temperature}°C
+                🌡️ {weather.temperature} °C
             </h3>
 
             <p>
-                {weather.description}
+                ☁️ {weather.description}
             </p>
 
             <p>
-                Humidity: {weather.humidity}%
+                💧 Humidity: {weather.humidity}%
             </p>
 
             <p>
-                Wind: {weather.windSpeed} km/h
+                💨 Wind: {weather.windSpeed} m/s
             </p>
-
         </div>
     );
 }

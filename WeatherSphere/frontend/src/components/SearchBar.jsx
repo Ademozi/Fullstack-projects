@@ -15,10 +15,9 @@ function SearchBar({ onSearch }) {
 
     return (
         <form onSubmit={handleSubmit}>
-
             <input
                 type="text"
-                placeholder="Search for a city..."
+                placeholder="Enter city..."
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
             />
@@ -26,7 +25,6 @@ function SearchBar({ onSearch }) {
             <button type="submit">
                 Search
             </button>
-
         </form>
     );
 }

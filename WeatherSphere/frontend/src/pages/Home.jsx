@@ -13,15 +13,18 @@ function Home() {
 
         try {
 
-            const response = await getWeather(city);
+            const data = await getWeather(city);
 
-            setWeather(response.data.weather);
+            setWeather(data.weather);
 
         } catch (error) {
 
-            console.error(error.response?.data || error.message);
+            console.error(error);
 
-            alert("City not found.");
+            alert(
+                error.response?.data?.message ||
+                "Unable to fetch weather."
+            );
 
         }
 
