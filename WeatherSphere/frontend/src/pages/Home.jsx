@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import SearchBar from "../components/SearchBar";
 import WeatherCard from "../components/WeatherCard";
+import Navbar from "../components/Navbar";
 
 import { getWeather } from "../services/weatherService";
 
@@ -31,15 +32,25 @@ function Home() {
     };
 
     return (
-        <div>
+        <>
+            <Navbar />
 
-            <h1>WeatherSphere</h1>
+            <div 
+                style={{
+                    maxWidth: "300px",
+                    margin: "40px auto",
+                }}
+            >
 
-            <SearchBar onSearch={handleSearch} />
+                <h1>WeatherSphere</h1>
 
-            <WeatherCard weather={weather} />
+                <SearchBar onSearch={handleSearch} />
 
-        </div>
+                <WeatherCard weather={weather} />
+
+            </div>
+        </>
+        
     );
 }
 

@@ -5,7 +5,15 @@ function WeatherCard({ weather }) {
     }
 
     return (
-        <div>
+        <div 
+            style={{
+                border: "1px solid #ddd",
+                borderRadius: "10px",
+                padding: "20px",
+                marginTop: "30px",
+                backgroundColor: "lightgray"
+            }}
+        >
             <h2>
                 {weather.city}, {weather.country}
             </h2>
