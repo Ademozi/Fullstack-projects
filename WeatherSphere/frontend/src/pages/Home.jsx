@@ -3,6 +3,7 @@ import { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import WeatherCard from "../components/WeatherCard";
 import Navbar from "../components/Navbar";
+import Favorites from "../components/Favorites";
 
 import { getWeather } from "../services/weatherService";
 import { addFavorite } from "../services/favoriteService";
@@ -75,7 +76,10 @@ function Home() {
 
                 <WeatherCard 
                     weather={weather}
-                    onAddFavorite={handleAddFavorite} />
+                    onAddFavorite={handleAddFavorite}
+                />
+
+                <Favorites />
 
             </div>
         </>
