@@ -1,4 +1,4 @@
-function WeatherCard({ weather }) {
+function WeatherCard({ weather, onAddFavorite }) {
 
     if (!weather) {
         return <p>Search for a city to see the weather.</p>;
@@ -33,6 +33,12 @@ function WeatherCard({ weather }) {
             <p>
                 💨 Wind: {weather.windSpeed} m/s
             </p>
+
+            <button 
+                onClick={() => onAddFavorite(weather)}
+            >
+                ❤️ Add to Favorites
+            </button>
         </div>
     );
 }

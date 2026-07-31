@@ -1,6 +1,9 @@
 const jwt = require("jsonwebtoken");
 
 const generateToken = (userId) => {
+
+    console.log("SIGN SECRET:", process.env.JWT_SECRET);
+
     return jwt.sign(
         {
             id: userId 

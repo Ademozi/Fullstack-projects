@@ -5,6 +5,7 @@ import WeatherCard from "../components/WeatherCard";
 import Navbar from "../components/Navbar";
 
 import { getWeather } from "../services/weatherService";
+import { addFavorite } from "../services/favoriteService";
 
 function Home() {
 
@@ -31,6 +32,32 @@ function Home() {
 
     };
 
+    const handleAddFavorite = async (weather) => {
+
+    try {
+
+        const favoriteData = {
+            city: weather.city,
+            country: weather.country
+        };
+
+        const response = await addFavorite(favoriteData);
+
+        alert(response.message);
+
+        } catch (error) {
+
+            console.error(error);
+
+            alert(
+                error.response?.data?.message ||
+                "Unable to save favorite."
+            );
+
+        }
+
+    };
+
     return (
         <>
             <Navbar />
@@ -46,7 +73,9 @@ function Home() {
 
                 <SearchBar onSearch={handleSearch} />
 
-                <WeatherCard weather={weather} />
+                <WeatherCard 
+                    weather={weather}
+                    onAddFavorite={handleAddFavorite} />
 
             </div>
         </>
